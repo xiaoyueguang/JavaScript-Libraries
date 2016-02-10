@@ -4,28 +4,41 @@
 		bannerSwipeLeft = window.getComputedStyle(bannerSwipe).left,
 		bannerli = banner.getElementsByTagName("li"),
 		bannerlength = bannerli.length,
-		current = 0;
+		current = 0,
+		timer = '',
+		status = "false";
 	
 	for(var i = 0;i<bannerlength;i++){
 		bannerli[i].style.left = (i * 100) + "%" ;
 	}
 	
-	//	滑动函数.
-	function bannerSwipeRun(num){
-		if(num === bannerlength){
-			current = num = 0;
-		}
-		current = num;
-		bannerSwipe.style.left = (-num * 100) + "%";
-		bannerSwipeBarAInit(num);
-	}
+	
 	
 	//	banner 自动轮播初始化
-	function bannerSwipeAuto(){
-		setInterval(function(){
-			current ++;
-			bannerSwipeRun(current);
-		},3000);
+	function bannerSwipeAuto(num){
+		if(arguments[1] === "click"){
+			clearInterval(timer);
+			bannerSwipeRun(num);
+			status = "false";
+		}
+		if(status === "false"){
+			console.log("这里执行")
+			status = "true";
+			timer = setInterval(function(){
+						current ++;
+						bannerSwipeRun(current);
+					},3000);
+		}
+		
+		//	滑动函数.
+		function bannerSwipeRun(numm){
+			if(numm === bannerlength){
+				numm = 0;
+			}
+			current = numm;
+			bannerSwipe.style.left = (-numm * 100) + "%";
+			bannerSwipeBarAInit(numm);
+		}
 	}
 	
 	//	指示器 初始化
@@ -37,7 +50,7 @@
 			a.setAttribute("data-index",i);
 			a.onclick = function(){
 				var index = this.getAttribute("data-index");
-				bannerSwipeRun(index);
+				bannerSwipeAuto(index,"click");
 			}
 			bar.appendChild(a);
 		}
@@ -64,9 +77,9 @@
 		}else{
 			current ++;
 		}
-		bannerSwipeRun(current);
+		bannerSwipeAuto(current,"click");
 	}
 	
 	bannerSwipeBarInit();
-	bannerSwipeAuto();
+	bannerSwipeAuto(0);
 //};
