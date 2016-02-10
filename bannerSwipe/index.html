@@ -2,12 +2,73 @@
 <html>
 <head>
 	<title>BannerSwipe</title>
-	<script src="bannerSwipe.js"></script>
+	
 	<style>
-		
+		div,ul,body,li,img {
+			padding:0;
+			margin:0;
+		}
+		.banner {
+			width:500px;
+			margin:0 auto;
+			overflow:hidden;
+			position:relative;
+		}
+		.banner-swipe {
+			width:100%;
+			list-style-type:none;
+			position:relative;
+			left:0;
+			height:315px;
+			transition:ease 0.5s;
+		}
+		.banner-swipe li {
+			width:100%;
+			position:absolute;
+		}
+		.banner-swipe img {
+			width:100%;
+		}
+		.banner-swipe-bar {
+			position:absolute;
+			bottom:10px;
+			
+		}
+		.banner-swipe-bar a {
+			height:10px;
+			width:10px;
+			border-radius:50%;
+			background:#d3d3d3;
+			display:inline-block;
+			margin-right:10px;
+		}
+		.banner-swipe-bar a.active {
+			background:#f23b22;
+		}
 	</style>
 </head>
 <body>
-	
+	<div id="banner" class="banner">
+		<ul class="banner-swipe">
+			<li>
+				<!--²âÊÔÍ¼Æ¬-->
+				<img src="http://www.pp3.cn/uploads/allimg/111126/1JJ2F24-0.jpg"/>
+			</li>
+			<li>
+				<!--²âÊÔÍ¼Æ¬-->
+				<img src="http://www.pp3.cn/uploads/allimg/111113/14135A919-9.jpg"/>
+			</li>
+			<li>
+				<!--²âÊÔÍ¼Æ¬-->
+				<img src="http://www.pp3.cn/uploads/allimg/111126/1JJ2F24-0.jpg"/>
+			</li>
+		</ul>
+		<div class="banner-swipe-bar">
+		</div>
+	</div>
+	<br/>
+	<button id="left" onclick="bannerGo('left')">×ó</button>
+	<button id="right" onclick="bannerGo('right')">ÓÒ</button>
 </body>
+<script src="bannerSwipe.js"></script>
 </html>
