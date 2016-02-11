@@ -139,3 +139,14 @@ function bannerSwipe(config){
 	}
 	bannerSwipeAuto(0);
 }
+
+function styleinit(id){
+	var style = document.createElement("style"),
+		str = "#" + id + "{overflow:hidden;position:relative;}";
+	str += "#" + id + " ul{width:100%;list-style-type:none;position:relative;left:0;transition:ease 0.5s;}";
+	str += "#" + id + " ul li{width:100%;position:absolute;}";
+	str += "#" + id + " ul img{width:100%;}";
+	style.innerHTML = str;
+	document.getElementById(id).appendChild(style);
+	
+}
