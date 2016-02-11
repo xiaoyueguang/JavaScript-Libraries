@@ -1,6 +1,6 @@
 //window.onload = function(){
 
-//	封装到构造函数
+//	封装函数
 function bannerSwipe(config){
 	//	参数设定
 	var obj = {};
@@ -10,18 +10,22 @@ function bannerSwipe(config){
 	//	设定ID
 	setObj("id","banner");
 	//	设定速度
-	setObj("speed",3000);
+	setObj("timer",3000);
 	//	设定是否循环
 	setObj("loop",true);
-	//	设定是否自动播放
+	//	设定是否自动轮播
 	setObj("autoplay",true);
+	//	设定向前按钮ID
+	setObj("prev","");
+	//	设定向后按钮ID
+	setObj("next","");
+	//	设定分页器
+	setObj("pagination","");
 	
 	
-	console.log(obj);
-	
-	
+	// 参数初始化
 	var	banner = document.getElementById(obj.id),
-		bannerSwipe = banner.getElementsByClassName("banner-swipe")[0],
+		bannerSwipe = banner.getElementsByTagName("ul")[0],
 		bannerSwipeLeft = window.getComputedStyle(bannerSwipe).left,
 		bannerli = banner.getElementsByTagName("li"),
 		bannerlength = bannerli.length,
@@ -32,6 +36,7 @@ function bannerSwipe(config){
 	for(var i = 0;i<bannerlength;i++){
 		bannerli[i].style.left = (i * 100) + "%" ;
 	}
+	
 	//	banner 自动轮播初始化
 	function bannerSwipeAuto(num){
 		if(arguments[1] === "click"){
@@ -46,7 +51,7 @@ function bannerSwipe(config){
 				timer = setInterval(function(){
 							currentEdit();
 							bannerSwipeRun(current);
-						},obj.speed);
+						},obj.timer);
 			}
 		}
 		
@@ -74,8 +79,8 @@ function bannerSwipe(config){
 		}
 	}
 	//	指示器 初始化
-	function bannerSwipeBarInit(){
-		var bar = banner.getElementsByClassName("banner-swipe-bar")[0];
+	function bannerSwipeBarInit(elem){
+		var bar = banner.getElementsByClassName(elem)[0];
 		var a;
 		for(var i = 0;i<bannerlength;i++){
 			a = document.createElement("a");
@@ -91,15 +96,17 @@ function bannerSwipe(config){
 	
 	//	指示器 添加 active
 	function bannerSwipeBarAInit(num){
-		var bar = banner.getElementsByClassName("banner-swipe-bar")[0],
-			a = bar.getElementsByTagName("a");
-		if(bar.getElementsByClassName("active").length > 0){
-			bar.getElementsByClassName("active")[0].className = "";
+		if(judg("pagination")){
+			var bar = banner.getElementsByClassName(obj.pagination)[0],
+				a = bar.getElementsByTagName("a");
+			if(bar.getElementsByClassName("active").length > 0){
+				bar.getElementsByClassName("active")[0].className = "";
+			}
+			a[num].className = "active";
 		}
-		a[num].className = "active";
 	}
 	
-	//	左右按钮
+	//	向前向后按钮
 	function bannerGo(str){
 		if(str === "left"){
 			currentEdit("prev");
@@ -109,12 +116,26 @@ function bannerSwipe(config){
 		bannerSwipeAuto(current,"click");
 	}
 	
-	bannerSwipeBarInit();
+	// 判断是否开启功能
+	function judg(str){
+		if(obj[str] === ""){
+			return false;
+		}
+		return true;
+	}
+	
+	if(judg("prev")){
+		document.getElementById(obj.prev).onclick = function(){
+			bannerGo("left");
+		}
+		document.getElementById(obj.next).onclick = function(){
+			bannerGo();
+		}
+	}
+	
+	if(judg("pagination")){
+		//console.log(judg(obj.pagination))
+		//bannerSwipeBarInit(obj.pagination);
+	}
 	bannerSwipeAuto(0);
-	document.getElementById("left").onclick = function(){
-		bannerGo("left");
-	}
-	document.getElementById("right").onclick = function(){
-		bannerGo();
-	}
 }
