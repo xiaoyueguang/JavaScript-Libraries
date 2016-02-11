@@ -1,5 +1,3 @@
-//window.onload = function(){
-
 //	封装函数
 function bannerSwipe(config){
 	//	参数设定
@@ -9,8 +7,12 @@ function bannerSwipe(config){
 	}
 	//	设定ID
 	setObj("id","banner");
-	//	设定速度
+	//	设定 banner 长宽
+	setObj("size","");
+	//	设定轮播时间
 	setObj("timer",3000);
+	//	设定轮播速度
+	setObj("speed","0.5");
 	//	设定是否循环
 	setObj("loop",true);
 	//	设定是否自动轮播
@@ -23,6 +25,7 @@ function bannerSwipe(config){
 	setObj("pagination","");
 	
 	
+	
 	// 参数初始化
 	var	banner = document.getElementById(obj.id),
 		bannerSwipe = banner.getElementsByTagName("ul")[0],
@@ -32,7 +35,12 @@ function bannerSwipe(config){
 		current = 0,
 		timer = '',
 		status = "false";
-		
+	
+	if(judg("size")){
+		banner.style.width = obj.size.split("*")[0] + "px";
+		banner.style.height = obj.size.split("*")[1] + "px";
+	}
+	
 	for(var i = 0;i<bannerlength;i++){
 		bannerli[i].style.left = (i * 100) + "%" ;
 	}
@@ -134,19 +142,29 @@ function bannerSwipe(config){
 	}
 	
 	if(judg("pagination")){
-		//console.log(judg(obj.pagination))
-		//bannerSwipeBarInit(obj.pagination);
+		bannerSwipeBarInit(obj.pagination);
 	}
 	bannerSwipeAuto(0);
-}
-
-function styleinit(id){
-	var style = document.createElement("style"),
-		str = "#" + id + "{overflow:hidden;position:relative;}";
-	str += "#" + id + " ul{width:100%;list-style-type:none;position:relative;left:0;transition:ease 0.5s;}";
-	str += "#" + id + " ul li{width:100%;position:absolute;}";
-	str += "#" + id + " ul img{width:100%;}";
-	style.innerHTML = str;
-	document.getElementById(id).appendChild(style);
 	
+	(function(){
+		var style = document.createElement("style"),
+			str = "#" + obj.id + "{overflow:hidden;position:relative;}";
+		str += "#" + obj.id + " ul{width:100%;list-style-type:none;position:relative;left:0;transition:ease " + obj.speed + "s;}";
+		str += "#" + obj.id + " ul li{width:100%;position:absolute;}";
+		str += "#" + obj.id + " ul img{width:100%;}";
+		style.innerHTML = str;
+		document.getElementById(obj.id).appendChild(style);
+	}());
 }
+var obj = {
+	id:"banner",
+	speed:1,
+	timer:2000,
+	loop:true,
+	autoplay:true,
+	prev:"left",
+	next:"right",
+	pagination:"banner-swipe-bar",
+	size:"600*300"
+}
+bannerSwipe(obj);
