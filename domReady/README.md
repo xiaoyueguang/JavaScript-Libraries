@@ -6,4 +6,4 @@
 
 * 引入 `domReady.js`  
 * domReady(fn)  
-* fn为待运行的方法
+* fn为需要运行的方法
