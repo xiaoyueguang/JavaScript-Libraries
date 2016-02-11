@@ -23,6 +23,8 @@ function bannerSwipe(config){
 	setObj("next","");
 	//	设定分页器
 	setObj("pagination","");
+	//	设定分页器位置(分别为 left right center )
+	setObj("paginationPosition","center");
 	
 	
 	
@@ -86,7 +88,7 @@ function bannerSwipe(config){
 			}
 		}
 	}
-	//	指示器 初始化
+	//	分页器 初始化
 	function bannerSwipeBarInit(elem){
 		var bar = banner.getElementsByClassName(elem)[0];
 		var a;
@@ -100,9 +102,27 @@ function bannerSwipe(config){
 			bar.appendChild(a);
 		}
 		bannerSwipeBarAInit(0);
+		
+		//分页器 移动位置
+		if(judg("paginationPosition")){
+			var position = obj.paginationPosition,
+				barwidth = window.getComputedStyle(bar).width,
+				width = window.getComputedStyle(banner).width;
+				console.log(width)
+				console.log(barwidth)
+			if(position === "left"){
+				bar.style.left = 0;
+			}
+			if(position === "center"){
+				bar.style.left = (parseInt(width) - parseInt(barwidth))/2 + "px";
+			}
+			if(position === "right"){
+				bar.style.right = 0;
+			}
+		}
 	}
 	
-	//	指示器 添加 active
+	//	分页器 添加 active
 	function bannerSwipeBarAInit(num){
 		if(judg("pagination")){
 			var bar = banner.getElementsByClassName(obj.pagination)[0],
@@ -165,6 +185,7 @@ var obj = {
 	prev:"left",
 	next:"right",
 	pagination:"banner-swipe-bar",
-	size:"600*300"
+	size:"600*300",
+	paginationPosition:"center"
 }
 bannerSwipe(obj);
