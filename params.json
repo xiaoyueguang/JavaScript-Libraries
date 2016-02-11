@@ -1,0 +1,1 @@
+{"name":"Javascript-libraries","tagline":"存放一些平时用到的 JavaScript 组件","body":"## 说明\r\n\r\n##### 用JS很多天了,也试着用自己目前所会的知识去写几个简单的轮子,平时调用的时候也方便一点。\r\n\r\n* bannerSwipe *关于一个轮播的插件*\r\n* domReady *DOM加载完立即执行方法*\r\n* resources *资源文件夹*","google":"","note":"Don't delete this file! It's used internally to help with page regeneration."}
