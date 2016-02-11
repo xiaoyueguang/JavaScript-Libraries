@@ -47,7 +47,9 @@
 		prev:"left",  
 		next:"right",  
 		//	设定分页器,输入类名  
-		pagination:"className"  
+		pagination:"className",  
+		//	设定分页器位置,选项有 left、center、right 默认为 center  
+		setObj("paginationPosition","center");  
 	});  
 	
 4、	CSS 样式 需要设置 整体框架的位置,分页器(分页器 类名为bar的容器 和 该类名下的 a 元素)和按钮
