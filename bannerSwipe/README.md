@@ -1,13 +1,16 @@
-这是一个基于 原生的JavaScript 的 banner滑动插件;
+## banner-Swipe
+##### 这是一个基于 原生的JavaScript 的 banner滑动插件
 
-/*********************************
-* 使用方法
-* 引入 bannerSwipe.js 
-* HTML的结构如下
-	<!--整体结构 需要设置id-->
-	<div id = "ID">
-		<ul>
-			<li>
+***
+
+#### 使用方法
+1.  引入 `bannerSwipe.js` 文件
+2.  HTML 的结构如下
+`
+    <!--整体结构 需要设置id-->
+    <div id = "ID">
+    	<ul>
+    		<li>
 				... content
 			</li>
 		</ul>
@@ -21,9 +24,11 @@
 			
 		</div>
 	</div>
-* 初始化函数
-	bannerSwipe({
-		//	ID
+`
+3.  初始化函数
+`
+    bannerSwipe({
+    	//	ID
 		id:"ID",
 		//	设置轮播时间,默认 3000(单位:毫秒)
 		speed:2000,
@@ -37,3 +42,4 @@
 		//	设定分页器,输入类名
 		pagination:"className"
 	});
+`
