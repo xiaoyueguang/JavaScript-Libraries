@@ -29,8 +29,11 @@ function bannerSwipe(config){
 	
 	
 	// 参数初始化
-	var	banner = document.getElementById(obj.id),
-		bannerSwipe = banner.getElementsByTagName("ul")[0],
+	var	banner = document.getElementById(obj.id);
+	//	添加判断,如果找不到该ID,以下不执行
+	if(banner === null)return false;
+	
+	var	bannerSwipe = banner.getElementsByTagName("ul")[0],
 		bannerSwipeLeft = window.getComputedStyle(bannerSwipe).left,
 		bannerli = banner.getElementsByTagName("li"),
 		bannerlength = bannerli.length,
