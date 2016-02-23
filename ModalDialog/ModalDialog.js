@@ -21,6 +21,8 @@ function dialog(obj){
 	backdiv.style.position = 'fixed';
 	backdiv.style.width = '100%';
 	backdiv.style.height = '100%';
+	backdiv.style.top = 0;
+	backdiv.style.left = 0;
 	backdiv.style.display = 'none';
 	div.style.width = this.width;
 	div.style.height = this.height;
@@ -124,5 +126,9 @@ var msgbox = new dialog({
 	height:'400px',
 	id:'dialog',
 	title:'标题',
-	content:'呵呵'
+	content:'测试测试内容'
 });
+
+document.getElementById('btn1').onclick = function(){
+	msgbox.inter(5000);
+};
