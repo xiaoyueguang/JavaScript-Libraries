@@ -1,0 +1,149 @@
+<html>
+    <head>
+        <title>ISCROLL</title>
+        <meta charset="utf8">
+        <meta name="viewport" content="initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+        <!--<script src="./iscroll-lite.js"></script>-->
+        <script src="./iscroll-probe.js"></script>
+        <style>
+            body, div, ul, li {
+                margin: 0;
+                padding: 0;
+            }
+            body {
+                overflow: hidden;
+            }
+            li {
+                height: 100px;
+                margin: 16px;
+            }
+            img {
+                width: 100px;
+                height: 100px;
+                float: left;
+            }
+            ul {
+                float: left;
+                width: 100%;
+            }
+            p {
+                display: none;
+            }
+            #wrapper {
+                position: relative;
+                width: 100%;
+                height: 100%;
+                /*overflow: hidden;*/
+            }
+            #test {
+                display:none;
+                text-align: center;
+                position: relative;
+            }
+            #test img {
+                width: 10px;
+                height: 10px;
+                position: absolute;
+                left: 100px;
+                -webkit-transition: all .4s ease;
+                transition: all .4s ease;
+            }
+            #test img.down {
+                -webkit-transform: rotate(180deg);
+                transform: rotate(180deg);
+            }
+        </style>
+        <script>
+
+        </script>
+    </head>
+    <body>
+        
+        <div id="wrapper">
+            <ul>
+                <li>
+                    <img src="./1.png"/>
+                    <p>测试</p>
+                </li>
+                <li>
+                    <img src="./1.png"/>
+                    <p>测试</p>
+                </li>
+                <li>
+                    <img src="./1.png"/>
+                    <p>测试</p>
+                </li>
+                <li>
+                    <img src="./1.png"/>
+                    <p>测试</p>
+                </li>
+                <li>
+                    <img src="./1.png"/>
+                    <p>测试</p>
+                </li>
+                <li>
+                    <img src="./1.png"/>
+                    <p>测试</p>
+                </li>
+                <li>
+                    <img src="./1.png"/>
+                    <p>测试</p>
+                </li>
+                <li>
+                    <img src="./1.png"/>
+                    <p>测试</p>
+                </li>
+                <li>
+                    <img src="./1.png"/>
+                    <p>测试</p>
+                </li>
+                <li>
+                    <img src="./1.png"/>
+                    <p>测试</p>
+                </li>
+                <li>
+                    <img src="./1.png"/>
+                    <p>测试</p>
+                </li>
+                <div id="test"><img src="./arrow.png"/>上拉加载更多</div>
+            </ul>
+            
+        </div>
+    </body>
+    
+</html>
+
+<script>
+    // console.log(IScroll)
+    window.onload = function(){
+        
+        var myScroll = new IScroll('#wrapper', {
+            probeType: 3,
+        });
+        var wrapper_height = parseInt(window.getComputedStyle(document.querySelector('#wrapper')).height);
+        var ul_height = parseInt(window.getComputedStyle(document.querySelector('#wrapper ul')).height);
+        
+        var refresh_status = false;
+        myScroll.on('scroll', function(){
+
+            document.querySelector('#test').style.display = 'block'
+                
+            if((wrapper_height - ul_height - this.y) > 50){
+                document.querySelector('#test img').className = 'down';
+                
+                refresh_status = true;
+            } else {
+                document.querySelector('#test img').className = ''
+            }
+
+        });
+        
+        myScroll.on('scrollEnd', function(){
+            if(refresh_status){
+                myScroll.refresh();
+            }
+        });
+        
+        // document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
+    }
+</script>
