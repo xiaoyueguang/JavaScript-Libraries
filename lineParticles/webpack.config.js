@@ -10,7 +10,7 @@ module.exports = {
     rules: [
       {
         test: /\.(ts)$/,
-        use: 'typescript-loader'
+        use: 'ts-loader'
       }
     ]
   },
